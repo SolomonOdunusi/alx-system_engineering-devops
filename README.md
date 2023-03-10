@@ -1,1 +1,1 @@
-Details on Shell Basics
+Shell Permissions
