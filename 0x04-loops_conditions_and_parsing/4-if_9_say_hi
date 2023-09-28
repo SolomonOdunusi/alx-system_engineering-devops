@@ -1,4 +1,4 @@
-#!/usr/bin env bash
+#!/usr/bin/env bash
 # This script displays Best School 10 times 
 # but displays Hi on the 9th iteration
 # You must use the while loop (for and until are forbidden)

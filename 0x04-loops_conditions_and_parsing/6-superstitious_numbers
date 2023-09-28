@@ -1,4 +1,4 @@
-#!/usr/bin env bash
+#!/usr/bin/env bash
 # Write a Bash script that displays
 # nums from 1 to 20 with
 # displays "bad luck from China", 
