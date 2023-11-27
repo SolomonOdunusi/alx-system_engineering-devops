@@ -13,7 +13,8 @@ ip=$2
 username=$3
 path_ssh_key=$4
 
-#Disable strict host key for scp
+# Disable strict host key for scp
+
 scp -o "StrictHostKeyChecking=no" -i "$path_ssh_key" "$path_file" "$username@ip:~/"
 
 if [ $? -eq 0 ]
