@@ -2,5 +2,6 @@
 
 package { 'puppet-lint':
 ensure   => '2.1.1',
-provider => 'gem'
+provider => 'gem',
+install_options => ['--no-document']
 }
