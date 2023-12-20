@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 # Nginx must be running as nginx user
 
+# Stop prcess
+service apache2 stop
+
 # change owner
 chown nginx:nginx /etc/nginx/nginx.conf
 
