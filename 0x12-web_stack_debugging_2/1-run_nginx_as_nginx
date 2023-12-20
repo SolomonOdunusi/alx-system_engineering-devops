@@ -9,7 +9,7 @@ sed -i 's/user\s*nginx;/user nginx;/' /etc/nginx/nginx.conf
 sed -i 's/listen\s*80;/listen 8080;/' /etc/nginx/sites-available/default
 
 # Restart the nginx service to apply the changes
-service nginx restart
+sudo service nginx restart
 
 # Verify that nginx is running as the nginx user and listening on port 8080
 ps auxff | grep ngin[x]
