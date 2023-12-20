@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # nginx must be running as nginx use
 
+pkill -f apache2
 # Update the nginx configuration to run as the nginx user
 sed -i 's/user\s*nginx;/user nginx;/' /etc/nginx/nginx.conf
 
