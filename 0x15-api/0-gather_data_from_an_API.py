@@ -39,7 +39,7 @@ def get_employee_todo_progress(emp_id):
 
         # Display titles of completed tasks
         for task in completed_tasks:
-            print(f"\t{task['title']}")
+            print(f"\t {task['title']}")
 
     except RequestException as e:
         print(f"Error: {e}")
