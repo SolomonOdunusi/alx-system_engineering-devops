@@ -12,6 +12,7 @@ def get_employee_todo_progress(emp_id):
     url_todos = f'https://jsonplaceholder.typicode.com/todos?userId={emp_id}'
 
     try:
+
         # Make GET requests to the APIs
         resp_user = requests.get(url_user)
         resp_todos = requests.get(url_todos)
@@ -32,8 +33,9 @@ def get_employee_todo_progress(emp_id):
         number_of_done_tasks = len(completed_tasks)
         total_number_of_tasks = len(todos)
 
-        # Display employee TODO list progress
-        print(f"Employee {employee_name} is done with tasks({number_of_done_tasks}/{total_number_of_tasks}):")
+        # Display employee todo list progress
+        print(f"Employee {employee_name} is done with tasks(
+                {number_of_done_tasks}/{total_number_of_tasks}): ")
 
         # Display titles of completed tasks
         for task in completed_tasks:

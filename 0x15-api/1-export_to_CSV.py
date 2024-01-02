@@ -4,6 +4,7 @@ import csv
 import requests
 from sys import argv
 
+
 def export_csv(user_id):
     """export data in the CSV format"""
     # get the info of the users and tasks by his id in dict format
@@ -24,6 +25,7 @@ def export_csv(user_id):
                     users.get('username'),
                     todo.get('completed'),
                     todo.get('title')])
+
 
 if __name__ == "__main__":
     export_csv(argv[1])
