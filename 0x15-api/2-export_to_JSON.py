@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """Extend your python to export to Json"""
 import json
 import requests
