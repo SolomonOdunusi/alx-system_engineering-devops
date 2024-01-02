@@ -1,43 +1,56 @@
 #!/usr/bin/python3
-"""
-Get data from an API
-on an employee's tasks
-"""
+"""Employee TODO list progress"""
 import requests
-from sys import argv
+from requests.exceptions import RequestException
+from sys import argv, exit
 
 
-def gather_data_from_api(employee_id):
-    """Get employee's tasks(data) from API"""
-    EMPLOYEE_NAME = ""
-    NUMBER_OF_DONE_TASKS = 0
-    TOTAL_NUMBER_OF_TASKS = 0
-    TASK_TITLE = []
+def get_employee_todo_progress(emp_id):
+    """Get and display the employee TODO list progress"""
+    # API URL for the given employee ID
+    url_user = f'https://jsonplaceholder.typicode.com/users/{emp_id}'
+    url_todos = f'https://jsonplaceholder.typicode.com/todos?userId={emp_id}'
 
-    # get the employee name by his id
-    users = requests.get("https://jsonplaceholder.typicode.com/users").json()
-    for user in users:
-        if user['id'] == int(employee_id):
-            EMPLOYEE_NAME = user['name']
-            break
+    try:
+        # Make GET requests to the APIs
+        resp_user = requests.get(url_user)
+        resp_todos = requests.get(url_todos)
 
-    # get the necessary information of the todo api
-    todos = requests.get("https://jsonplaceholder.typicode.com/todos").json()
-    for todo in todos:
-        if todo['userId'] == int(employee_id):
-            if todo['completed'] is True:
-                NUMBER_OF_DONE_TASKS += 1
-                TASK_TITLE.append(todo['title'])
-            TOTAL_NUMBER_OF_TASKS += 1
+        # Check if the requests were successful (status code 200)
+        resp_user.raise_for_status()
+        resp_todos.raise_for_status()
 
-    print("Employee {} is done with tasks({}/{}):".format(
-        EMPLOYEE_NAME,
-        NUMBER_OF_DONE_TASKS,
-        TOTAL_NUMBER_OF_TASKS))
+        # Parse the JSON responses
+        user = resp_user.json()
+        todos = resp_todos.json()
 
-    for quote in TASK_TITLE:
-        print("\t {}".format(quote))
+        # Extract employee information
+        employee_name = user.get('name', f"Employee {employee_id}")
+
+        # Count completed and total tasks
+        completed_tasks = [task for task in todos if task['completed']]
+        number_of_done_tasks = len(completed_tasks)
+        total_number_of_tasks = len(todos)
+
+        # Display employee TODO list progress
+        print(f"Employee {employee_name} is done with tasks({number_of_done_tasks}/{total_number_of_tasks}):")
+
+        # Display titles of completed tasks
+        for task in completed_tasks:
+            print(f"\t{task['title']}")
+
+    except RequestException as e:
+        print(f"Error: {e}")
 
 
 if __name__ == "__main__":
-    gather_data_from_api(argv[1])
+    # Check if an employee ID is provided as a command-line argument
+    if len(argv) != 2:
+        print("Usage: python script.py <employee_id>")
+        exit(1)
+
+    # Get the employee ID from the command-line argument
+    employee_id = int(argv[1])
+
+    # Call the function to get and display the employee TODO list progress
+    get_employee_todo_progress(employee_id)
