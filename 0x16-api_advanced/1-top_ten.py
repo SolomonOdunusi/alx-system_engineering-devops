@@ -9,7 +9,14 @@ import requests
 def top_ten(subreddit):
     """Returns the top ten posts for a given subreddit"""
     url = f'https://www.reddit.com/r/{subreddit}/hot.json'
-    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
+    client_id = 'SmK-O0b7WRWToYTSesQgJw'
+    client_secret = 'Q9VyH5FCZAnvOfZqZQKvbxMFySY0yQ'
+
+    headers = {
+        'User-Agent': 'Test_alx_user_agent',
+        'Authorization': f'Basic {base64.b64encode(
+                            f"{client_id}:{client_secret}".encode()).decode()}'
+    }
     params = {'limit': 3}
     response = requests.get(url, headers=headers, params=params,
                             allow_redirects=False)
