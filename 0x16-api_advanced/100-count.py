@@ -4,9 +4,10 @@ A module that queries the reddit API
 """
 import requests
 
+
 def count_words(subreddit, word_list, after=None, count_dict=None):
     """
-    Recursive function to count occurrences of keywords in the titles of 
+    Recursive function to count occurrences of keywords in the titles of
     hot articles for a set of given subreddit.
 
     Args:
@@ -21,11 +22,11 @@ def count_words(subreddit, word_list, after=None, count_dict=None):
         count_dict = {}
 
     base_url = f'https://www.reddit.com/r/{subreddit}/hot.json'
-    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
-
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
     params = {'limit': 100, 'after': after} if after else {'limit': 100}
 
-    response = requests.get(base_url, headers=headers, params=params, allow_redirects=False)
+    response = requests.get(base_url, headers=headers, params=params,
+                            allow_redirects=False)
 
     if response.status_code != 200:
         return None
